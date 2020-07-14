@@ -11,11 +11,7 @@
         <div :class="$style.messageNoData" v-if="!user.message.length">
           <icon type="no-data"></icon>
         </div>
-        <message-item
-          :key="key"
-          :message="message"
-          v-for="(message, key) in user.message"
-        ></message-item>
+        <message-item :key="key" :message="message" v-for="(message, key) in user.message"></message-item>
       </template>
     </div>
   </div>
@@ -30,12 +26,7 @@ import { State, Action } from "vuex-class";
 import { message, markALlMessage } from "@/api/user";
 import { GET__MY__MESSAGE } from "@/store/user/type";
 import { UserState } from "@/store/interface/user";
-import {
-  setElementAttr,
-  calcClientHeight,
-  docH,
-  getLocalStorage
-} from "@/utils";
+import { setElementAttr, calcClientHeight, getLocalStorage } from "@/utils";
 
 @Component({
   components: {

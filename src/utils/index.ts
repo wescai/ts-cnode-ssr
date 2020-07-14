@@ -52,4 +52,6 @@ export const calcClientHeight = (elCls: Array<string>): number =>
 export const setElementAttr = (elCls: string, attr: string, val: any) =>
   document.querySelector(elCls)!.setAttribute(attr, val);
 
-export const docH = document.documentElement.clientHeight;
+export const getDocH = () => {
+  return document.documentElement.clientHeight;
+}

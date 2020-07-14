@@ -6,40 +6,35 @@
     <div :class="$style.topicsDetailsContainer">
       <div :class="$style.topicsDetailsTitle">{{ details.title }}</div>
       <div :class="$style.topicsDetailsHeader">
-        <image-lazy
-          :class="$style.topicsDetailsHeaderAvatar"
-          :src="details.author.avatar_url"
-        />
+        <image-lazy :class="$style.topicsDetailsHeaderAvatar" :src="details.author.avatar_url" />
         <span :class="$style.topicsDetailsHeaderNickname">
-          <router-link :to="path.user(details.author.loginname)">{{
+          <router-link :to="path.user(details.author.loginname)">
+            {{
             details.author.loginname
-          }}</router-link>
+            }}
+          </router-link>
         </span>
-        <span :class="$style.topicsDetailsHeaderText">{{
+        <span :class="$style.topicsDetailsHeaderText">
+          {{
           `发布于${ago(details.create_at)}`
-        }}</span>
+          }}
+        </span>
       </div>
       <div :class="$style.topicsDetailsBody">
         <div :class="$style.topicsDetailsBodyLeft">
           <span>阅读数：{{ details.visit_count }}</span>
           <span>回复数：{{ details.reply_count }}</span>
         </div>
-        <span :class="collectCls" @click="handlerCollect">{{
+        <span :class="collectCls" @click="handlerCollect">
+          {{
           details.is_collect ? "取消收藏" : "收藏"
-        }}</span>
+          }}
+        </span>
       </div>
-      <div
-        :class="$style.topicsDetailsContent"
-        v-highlight
-        v-html="details.content"
-      ></div>
+      <div :class="$style.topicsDetailsContent" v-highlight v-html="details.content"></div>
       <div :class="$style.topicsDetailsReplies">
         <div v-if="user.accessToken">
-          <textarea
-            maxlength="150"
-            placeholder="我来说一句"
-            v-model="comment"
-          />
+          <textarea maxlength="150" placeholder="我来说一句" v-model="comment" />
           <div :class="$style.topicsDetailsSubmit">
             <span @click="handlerSubmit">评论</span>
           </div>
@@ -47,15 +42,9 @@
         <div :class="$style.topicsDetailsNotLogin" v-else>请登录后再来评论</div>
       </div>
       <comment :comments="replies" v-if="replies.length" />
-      <div :class="$style.topicsDetailsNotReplies" v-else>
-        还没有评论，快来抢沙发
-      </div>
+      <div :class="$style.topicsDetailsNotReplies" v-else>还没有评论，快来抢沙发</div>
     </div>
-    <div
-      @click="handlerScrollToTop"
-      class="iconfont icon-top"
-      v-show="showTop"
-    ></div>
+    <div @click="handlerScrollToTop" class="iconfont icon-top" v-show="showTop"></div>
   </div>
 </template>
 
@@ -81,7 +70,7 @@ import { UserState } from "@/store/interface/user";
 import { collect, deCollect } from "@/api/user";
 import { toast } from "@/components/toast/index.ts";
 import { API_replies } from "@/api/topics";
-import { getElementAttr, setElementAttr, docH } from "@/utils";
+import { getElementAttr, setElementAttr } from "@/utils";
 
 type getTopicDetails = (topic: string) => TopicDetails;
 

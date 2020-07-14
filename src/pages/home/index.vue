@@ -47,7 +47,7 @@ import Skeleton from "./skeleton.vue";
 import * as type from "@/store/topics/type";
 import { Action, Getter, State } from "vuex-class";
 import { TopicInfo, TabsInfo } from "@/store/interface/topics";
-import { calcClientHeight, docH } from "@/utils";
+import { calcClientHeight } from "@/utils";
 import topicTabs from "./config";
 import { LoginInfo } from "@/store/interface/user";
 import { USER__LOGIN } from "@/store/user/type";
