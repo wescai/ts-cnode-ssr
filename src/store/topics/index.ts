@@ -20,6 +20,7 @@ let actions: ActionTree<TopicsState, any> = {
   async [type.REQUEST__TOPICS]({ commit }, data = { tab: "all", page: 1 }) {
     let topics = await getTopics(data.tab, data.page);
     commit(type.REQUEST__TOPICS, topics);
+    return topics;
   },
   [type.TOPICS__CHANGE__TAB]({ commit, dispatch }, tab: string) {
     commit(type.TOPICS__CHANGE__TAB, tab);
@@ -32,6 +33,7 @@ let actions: ActionTree<TopicsState, any> = {
     let topicDetails = await getTopicDetails(topic);
     topicDetails = Object.assign({}, topicDetails, { scroll: 0 });
     commit(type.REQUEST__TOPIC__DETAILS, topicDetails);
+    return topicDetails;
   },
   [type.SET__TOPICS__SCROLL]({ commit }, scroll: number) {
     commit(type.SET__TOPICS__SCROLL, scroll);

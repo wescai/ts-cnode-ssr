@@ -9,10 +9,16 @@
       <div :class="$style.userContainerHeader">
         <image-lazy :class="$style.userAvatar" :src="userInfo.avatar_url" />
         <div :class="$style.userContainerHeaderInfo">
-          <div :class="$style.userContainerHeaderNickname">{{ userInfo.loginname }}</div>
-          <div :class="$style.userContainerHeaderScore">{{ userInfo.score }}积分</div>
+          <div :class="$style.userContainerHeaderNickname">
+            {{ userInfo.loginname }}
+          </div>
+          <div :class="$style.userContainerHeaderScore">
+            {{ userInfo.score }}积分
+          </div>
         </div>
-        <span :class="$style.userContainerHeaderTime">注册时间{{ ago(userInfo.create_at) }}</span>
+        <span :class="$style.userContainerHeaderTime"
+          >注册时间{{ ago(userInfo.create_at) }}</span
+        >
       </div>
       <tabs :class="$style.tabs" v-model="userTab">
         <tabs-item id="replies">参与的话题</tabs-item>
@@ -21,13 +27,24 @@
       </tabs>
       <tab-container @scroll="handerScroll" ref="content" v-model="userTab">
         <tab-container-item :class="$style.userReplies" id="replies">
-          <topics-item :key="key" :topics="replie" v-for="(replie, key) in userInfo.recent_replies"></topics-item>
-          <div :class="$style.userNoData" v-if="!userInfo.recent_replies.length">
+          <topics-item
+            :key="key"
+            :topics="replie"
+            v-for="(replie, key) in userInfo.recent_replies"
+          ></topics-item>
+          <div
+            :class="$style.userNoData"
+            v-if="!userInfo.recent_replies.length"
+          >
             <icon type="no-data"></icon>
           </div>
         </tab-container-item>
         <tab-container-item :class="$style.userTopics" id="topics">
-          <topics-item :key="key" :topics="topics" v-for="(topics, key) in userInfo.recent_topics"></topics-item>
+          <topics-item
+            :key="key"
+            :topics="topics"
+            v-for="(topics, key) in userInfo.recent_topics"
+          ></topics-item>
           <div :class="$style.userNoData" v-if="!userInfo.recent_topics.length">
             <icon type="no-data"></icon>
           </div>

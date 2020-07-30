@@ -3,7 +3,6 @@ import type from "@/utils/type";
 import VueToast from "./toast.vue";
 
 const NToast = Vue.extend(VueToast);
-const el = document.createElement("div");
 
 type position = "center" | "top";
 interface IToast {
@@ -25,7 +24,14 @@ const parseOptions = (message: any) =>
 class Toast implements IToast {
   private queue: Array<any> = [];
   private createToast(data: ToastData | string) {
+    const isServer = process.env.VUE_ENV === "server";
+    if (isServer) {
+      return;
+    }
+    const el = document.createElement("div");
+
     let propsData = parseOptions(data);
+
     let toast = new NToast({ el, propsData });
     //@ts-ignore
     document.body.appendChild(toast.$el);

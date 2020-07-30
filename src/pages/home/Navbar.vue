@@ -14,9 +14,9 @@
         </router-link>
       </div>
       <tabs :class="$style.tabs" ref="tabs" v-model="topicsTab">
-        <tabs-item :id="tab.id" :key="key" v-for="(tab, key) in tabs">{{
-          tab.value
-        }}</tabs-item>
+        <tabs-item :id="tab.id" :key="key" v-for="(tab, key) in tabs">
+          {{ tab.value }}
+        </tabs-item>
       </tabs>
     </header>
     <slot></slot>
@@ -36,7 +36,6 @@ import topicTabs from "./config";
 import { TopicInfo } from "@/store/interface/topics";
 import { LoginInfo } from "../../store/interface/user";
 
-let beforeScrollTop = window.pageYOffset;
 @Component({
   components: {
     Tabs,
@@ -61,6 +60,7 @@ export default class HomeNavbar extends Vue {
   handlerScroll() {
     if (!this.$refs.toolBar) return; // TODO：切换路由的时候有为空的时候
     let winPageY = window.pageYOffset;
+    let beforeScrollTop = window.pageYOffset;
     let diffX = winPageY - beforeScrollTop;
     if (winPageY > 1000) {
       this.$emit("show");

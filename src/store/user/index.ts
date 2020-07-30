@@ -6,8 +6,10 @@ import { CHANGE__COLLECT } from "@/store/topics/type";
 import { setLocalStorage, getLocalStorage, removeLocalStorage } from "@/utils";
 import { TopicInfo } from "@/store/interface/topics";
 
+const isServer = process.env.VUE_ENV === "server";
+
 let state: user.UserState = {
-  accessToken: getLocalStorage("accessToken"),
+  accessToken: isServer ? "" : getLocalStorage("accessToken"),
   users: [],
   tab: "replies",
   scroll: 0,

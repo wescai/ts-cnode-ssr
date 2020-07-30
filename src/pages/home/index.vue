@@ -51,6 +51,9 @@ import { calcClientHeight } from "@/utils";
 import topicTabs from "./config";
 import { LoginInfo } from "@/store/interface/user";
 import { USER__LOGIN } from "@/store/user/type";
+import { Store } from "vuex";
+import Router from "vue-router";
+
 type requestTopics = (data?: { tab?: string; page?: number }) => void;
 
 @Component({
@@ -61,6 +64,9 @@ type requestTopics = (data?: { tab?: string; page?: number }) => void;
     InfiniteLoader,
     Skeleton,
     HomeNavBar
+  },
+  serverPrefetch: function() {
+    return this.$store.dispatch(type.REQUEST__TOPICS);
   },
   inject: ["path"]
 })

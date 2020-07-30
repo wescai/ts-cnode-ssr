@@ -9,6 +9,8 @@ type IRouteConfig = RouteConfig & {
   private: boolean; // 添加一个自定义属性
 };
 
+import Home from "./pages/home/index.vue";
+
 //@ts-ignore
 let registerRouter = require.context("./pages", true, /_router\.ts$/i);
 registerRouter.keys().forEach((fileName: string) => {
@@ -23,6 +25,9 @@ registerRouter.keys().forEach((fileName: string) => {
 
 match! && routes.push(match!); // 如果是通配 确保在最后
 
-export default new Router({
-  routes
-});
+export default function CreateRouter() {
+  return new Router({
+    mode: "history",
+    routes
+  });
+}

@@ -1,30 +1,32 @@
 import Vue from "vue";
 import App from "./App.vue";
-import router from "./router";
-import store from "./store/index";
+import createRouter from "./router";
+import createStore from "./store";
 import * as path from "./path";
-import { init as apiInit } from "./api";
 import ImageLazy from "@/components/imgae/index.vue";
+import VueMeta from "vue-meta";
 
-import "@/directive";
+Vue.use(VueMeta, {
+  // optional pluginOptions
+  refreshOnceOnNavigation: true
+});
+
 import "../style/index.scss";
-import "./common/fastclick";
-import "normalize.css";
 
 Vue.component("image-lazy", ImageLazy);
-//@ts-ignore
-window.FastClick.attach(document.body); // fix click 300ms
 
 Vue.config.productionTip = false;
 
-apiInit(store)
-
-new Vue({
-  el: "#app",
-  router,
-  store,
-  render: h => h(App),
-  provide: {
-    path
-  }
-});
+export default () => {
+  const router = createRouter();
+  const store = createStore();
+  const app = new Vue({
+    router,
+    store,
+    render: h => h(App),
+    provide: {
+      path
+    }
+  });
+  return { app, router, store };
+};

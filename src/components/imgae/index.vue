@@ -7,13 +7,6 @@ import { Vue, Prop, Component } from "vue-property-decorator";
 let observer: IntersectionObserver | null;
 let observerNum: number = 0;
 
-if (!("IntersectionObserver" in window)) {
-  let script = document.createElement("script");
-  script.src =
-    "https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver";
-  document.body.appendChild(script);
-}
-
 @Component
 export default class ImageLazy extends Vue {
   @Prop({ default: true }) private lazy!: boolean;
@@ -25,6 +18,12 @@ export default class ImageLazy extends Vue {
   })
   private placeholder!: string;
   mounted() {
+    if (!("IntersectionObserver" in window)) {
+      let script = document.createElement("script");
+      script.src =
+        "https://polyfill.io/v2/polyfill.min.js?features=IntersectionObserver";
+      document.body.appendChild(script);
+    }
     const $img = this.$refs.img;
     if (!this.lazy) {
       this.loadImg($img as HTMLImageElement);

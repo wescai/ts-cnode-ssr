@@ -11,7 +11,11 @@
         <div :class="$style.messageNoData" v-if="!user.message.length">
           <icon type="no-data"></icon>
         </div>
-        <message-item :key="key" :message="message" v-for="(message, key) in user.message"></message-item>
+        <message-item
+          :key="key"
+          :message="message"
+          v-for="(message, key) in user.message"
+        ></message-item>
       </template>
     </div>
   </div>

@@ -54,4 +54,4 @@ export const setElementAttr = (elCls: string, attr: string, val: any) =>
 
 export const getDocH = () => {
   return document.documentElement.clientHeight;
-}
+};

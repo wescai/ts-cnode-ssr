@@ -7,18 +7,34 @@ import { USER__LOGOUT } from "@/store/user/type";
 const axios = Axios.create({
   baseURL,
   timeout: 0,
-  headers: { "X-Requested-With": "XMLHttpRequest" },
-  maxContentLength: 2000
+  headers: { "X-Requested-With": "XMLHttpRequest" }
+  //maxContentLength: 20000
 });
 
+let isInit = false;
+
 interface State {
-  request: boolean
+  request: boolean;
 }
-export const init = (store: Store<State>) => {
+export const init = (store: Store<State>, agent: any) => {
+  if (isInit) {
+    return;
+  }
+
+  isInit = true;
   let accesstoken = () => store.getters.token;
   axios.interceptors.request.use(
     config => {
-      store.commit('request', true)
+      if (agent) {
+        if (
+          config.baseURL!.indexOf("https") !== -1 ||
+          config.url!.indexOf("https") !== -1
+        ) {
+          config.httpsAgent = agent;
+          config.proxy = false;
+        }
+      }
+      store.commit("request", true);
       let login = !!~config.url!.indexOf("accesstoken");
       let method = config.method;
       if (method === "get" && !config.params && accesstoken()) {
@@ -39,16 +55,22 @@ export const init = (store: Store<State>) => {
 
   axios.interceptors.response.use(
     response => {
-      store.commit('request', false);
+      store.commit("request", false);
       return response;
     },
-    ({ response }) => {
-      store.commit('request', false);
-      if (response.status === 404) {
-        toast.show('API 未开放');
+    error => {
+      store.commit("request", false);
+      const isServer = process.env.VUE_ENV === "server";
+      if (isServer) {
         return;
       }
-      let message = (response.data && response.data.error_msg) || '';
+      const { response } = error;
+      if (response && response.status === 404) {
+        toast.show("API 未开放");
+        return;
+      }
+      let message =
+        (response && response.data && response.data.error_msg) || "";
       store.commit(USER__LOGOUT);
       toast.show({ message, duration: 5000 });
     }
