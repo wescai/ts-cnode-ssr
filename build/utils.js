@@ -4,7 +4,6 @@ const config = require('../config')
 const packageConfig = require('../package.json')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
-// 返回文件绝对路径
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'
     ? config.build.assetsSubDirectory
@@ -21,7 +20,6 @@ const findExisting = (context, files) => {
   }
 }
 
-// cssloader兼容各种预处理语言(less|sass|scss|stylus)
 exports.cssLoaders = function (rootOptions) {
   const shadowMode = !!process.env.VUE_CLI_CSS_SHADOW_MODE
   const isProd = process.env.NODE_ENV === 'production'
@@ -191,7 +189,6 @@ exports.cssLoaders = function (rootOptions) {
   return rules
 }
 
-//创建友好错误提示的格式
 exports.createNotifierCallback = () => {
   const notifier = require('node-notifier')
 

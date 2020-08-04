@@ -20,11 +20,9 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       usePostCSS: true
     })
   },
-  devtool: config.dev.devtool, //  cheap-module-eval-source-map编译更快
+  devtool: config.dev.devtool,
   plugins: [
-    // 热加载必备
     new webpack.HotModuleReplacementPlugin(),
-    // 友好错误提示
     new FriendlyErrorsPlugin({
       onErrors: config.dev.notifyOnErrors
         ? utils.createNotifierCallback()
