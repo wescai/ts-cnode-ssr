@@ -22,7 +22,7 @@
     "koa-send": "^5.0.1",
     "lru-cache": "^6.0.0",
     "normalize.css": "^8.0.0",
-    "tunnel": "0.0.6",
+    "tslib": "^2.0.1",
     "vue": "^2.6.10",
     "vue-class-component": "^6.0.0",
     "vue-content-loader": "^0.2.1",
@@ -38,7 +38,6 @@
   "devDependencies": {
     "@types/highlight.js": "^9.12.3",
     "@types/jest": "^22.0.1",
-    "@types/tunnel": "0.0.1",
     "@vue/cli-plugin-babel": "^3.0.0-beta.15",
     "@vue/cli-plugin-eslint": "^3.0.0-beta.15",
     "@vue/cli-plugin-typescript": "^3.0.0-beta.15",

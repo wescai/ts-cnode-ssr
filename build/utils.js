@@ -2,7 +2,6 @@ const fs = require('fs')
 const path = require('path')
 const config = require('../config')
 const packageConfig = require('../package.json')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 
 exports.assetsPath = function (_path) {
   const assetsSubDirectory = process.env.NODE_ENV === 'production'

@@ -46,8 +46,6 @@ router.get('/public/*', async (ctx, next) => {
   await send(ctx, ctx.path, { root: __dirname + '/..' });
 })
 
-
-
 const render = async (ctx, next) => {
   ctx.set('Content-Type', 'text/html')
 
